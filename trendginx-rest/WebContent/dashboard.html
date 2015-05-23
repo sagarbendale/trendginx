@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="">
+		<meta name="author" content="">
+
+		<title>trendGinX</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+		<link rel="favicon" href="favicon.ico" type="image/x-icon" />
+		<link rel="stylesheet"
+			href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+		<link href="css/trendginx-dashboard.css" rel="stylesheet">
+		<link href="fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" href="fonts/foundation-icons/foundation-icons.css" />
+		<script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
+</head>
+
+<body>
+
+	<nav class="navbar navbar-default navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+					aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#"><i class="fa fa-bar-chart"></i> trendGinX
+			</div>
+			<div class="collapse navbar-collapse"
+				id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#" id="reqId">
+					</a></li>
+
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-4 col-md-4 col-sm-12">
+				<div class="panel panel-default">
+					<div class="panel-heading panel-heading-custom">
+						<i class="fi-graph-pie"></i>&nbsp;&nbsp;Overall Sentiment Analysis
+					</div>
+					<div class="panel-body">
+						<div id="sentiment-overall" style="width: 100%; height: 270px;">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-8 col-md-8 col-sm-12">
+				<div class="panel panel-default">
+					<div class="panel-heading panel-heading-custom">
+						<i class="fi-graph-bar"></i>&nbsp;&nbsp;Sentiment Analyisis By
+						Week
+					</div>
+					<div class="panel-body">
+						<div id="sentiment-by-week" style="width: 100%; height: 270px;">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+
+
+			<div class="col-xs-6 col-md-6 col-sm-12">
+				<div class="panel panel-default ">
+					<div class="panel-heading panel-heading-custom">
+						<i class="fi-plus"></i>&nbsp;&nbsp;Top Positive Words
+					</div>
+					<div class="panel-body">
+						<div id="pos_words" style="width: 100%; height: 260px;"></div>
+
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-6 col-md-6 col-sm-12">
+				<div class="panel panel-default">
+					<div class="panel-heading panel-heading-custom">
+						<i class="fi-minus"></i>&nbsp;&nbsp; Top Negative Words
+					</div>
+					<div class="panel-body">
+						<div id="neg_words" style="width: 100%; height: 260px;"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+
+			<div class="col-xs-6 col-md-6 col-sm-12">
+				<div class="panel panel-default">
+					<div class="panel-heading panel-heading-custom">
+						<i class="fi-graph-trend"></i>&nbsp;&nbsp;Tweets Rate / Projected
+						Rate
+					</div>
+					<div class="panel-body">
+						<div id="tweets-rate" style="width: 100%; height: 200px;"></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-6 col-md-6 col-sm-12">
+				<div class="panel panel-default">
+					<div class="panel-heading panel-heading-custom">
+						<i class="fi-alert"></i>&nbsp;&nbsp;Overall Sensitive Tweets
+					</div>
+					<div class="panel-body">
+						<div class="row">
+
+							<div class="col-xs-6 col-md-6 col-sm-12">
+								<div id="overall-sens" style="width: 100%; height: 200px;">
+								</div>
+
+							</div>
+							<div class="col-xs-6 col-md-6 col-sm-12">
+								<table class="table table-striped" id="sens-twt">
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12 col-md-12 col-sm-12">
+				<div class="panel panel-default">
+					<div class="panel-heading panel-heading-custom">
+						<i class="fi-social-twitter"></i>&nbsp;&nbsp;Global Distribution
+					</div>
+					<div class="panel-body">
+  						<div id="map" style="width: 100%; height: 300px;"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-3 col-md-3 col-sm-12">
+				<div class="panel panel-default">
+					<div class="panel-heading panel-heading-custom">
+						<i class="fi-torsos"></i>&nbsp;&nbsp;Top Tweeters
+					</div>
+					<div class="panel-body">
+						<table class="table table-striped" id="top_twt_users">
+							<tr>
+								<th>User</th>
+								<th>Tweet Count</th>
+							</tr>
+
+						</table>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-xs-3 col-md-3 col-sm-12">
+				<div class="panel panel-default">
+					<div class="panel-heading panel-heading-custom">
+						<i class="fi-social-twitter"></i>&nbsp;&nbsp;Favourite Tweets
+					</div>
+					<div class="panel-body">
+						<table class="table table-striped" id="fv-twt">
+						</table>
+
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-3 col-md-3 col-sm-12">
+				<div class="panel panel-default">
+					<div class="panel-heading panel-heading-custom">
+						<i class="fi-social-twitter"></i>&nbsp;&nbsp;Top ReTweets
+					</div>
+					<div class="panel-body">
+						<table class="table table-striped" id="top-trtwt">
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-3 col-md-3 col-sm-12">
+				<div class="panel panel-default">
+					<div class="panel-heading panel-heading-custom">
+						<i class="fi-social-twitter"></i>&nbsp;&nbsp;Latest Tweets
+					</div>
+					<div class="panel-body">
+						<table class="table table-striped" id="latest-twt">
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer> 
+	        <div class="container text-center">
+            	<p>Copyright &copy; trendGinx.com 2015</p>
+        	</div> 
+	</footer>
+
+	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	<script src="js/trendginx.js"></script>
+	<script src="http://code.highcharts.com/highcharts.js"></script>
+	<script src="http://code.highcharts.com/highcharts-more.js"></script>
+	<script src="http://code.highcharts.com/modules/solid-gauge.src.js"></script>	
+	<script>
+          $( document ).ready(function() {
+        	  
+        	  //generateDashboard();
+
+          });
+    </script>
+
+</body>
+
+</html>
